@@ -7,7 +7,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import { callApi } from "@/pages/api/api"; // 确保路径正确
+import { callApi } from "@/lib/api"; // 确保路径正确
 
 // 类型定义
 export interface MenuItem {

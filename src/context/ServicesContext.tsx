@@ -1,13 +1,48 @@
-// app/context/ServicesContext.jsx
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { callApi } from "@/pages/api/api"; // Adjust the import path as necessary
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { callApi } from "@/lib/api"; // ✅ 建议把 API 移到 utils 或 lib 文件夹
 
-const ServicesContext = createContext();
+// 🔹 定义服务类型
+interface Service {
+  id: number;
+  title: string;
+  price: number;
+  duration: number;
+  slug: string;
+  image_url: string;
+  description: string;
+}
 
-export const ServicesProvider = ({ children }) => {
-  const [serviceCategories, setServiceCategories] = useState([]);
+// 🔹 定义服务分类类型
+interface ServiceCategory {
+  id: number;
+  name: string;
+  services: Service[];
+}
+
+// 🔹 定义 context 提供的值
+interface ServicesContextType {
+  serviceCategories: ServiceCategory[];
+  loading: boolean;
+}
+
+// 创建 context
+const ServicesContext = createContext<ServicesContextType | undefined>(
+  undefined
+);
+
+// Provider 组件
+export const ServicesProvider = ({ children }: { children: ReactNode }) => {
+  const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>(
+    []
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,7 +65,7 @@ export const ServicesProvider = ({ children }) => {
         }
       `,
     }).then((data) => {
-      setServiceCategories(data.serviceCategories);
+      setServiceCategories(data.serviceCategories || []);
       setLoading(false);
     });
   }, []);
@@ -42,4 +77,11 @@ export const ServicesProvider = ({ children }) => {
   );
 };
 
-export const useServices = () => useContext(ServicesContext);
+// ✅ Hook：使用 context
+export const useServices = (): ServicesContextType => {
+  const context = useContext(ServicesContext);
+  if (!context) {
+    throw new Error("useServices must be used within a ServicesProvider");
+  }
+  return context;
+};
