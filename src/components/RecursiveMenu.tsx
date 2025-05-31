@@ -13,7 +13,15 @@ interface MenuItemType {
   parent_id?: number;
   children?: MenuItemType[];
 }
-
+interface Service {
+  id: number;
+  title: string;
+  price: number;
+  duration: number;
+  slug: string;
+  image_url?: string;
+  description?: string;
+}
 export default function RecursiveMenu({ menu }: { menu: MenuItemType }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -68,7 +76,7 @@ export default function RecursiveMenu({ menu }: { menu: MenuItemType }) {
               >
                 {cat.name}
               </MenuItem>
-              {cat.services?.map((srv: any) => (
+              {cat.services?.map((srv: Service) => (
                 <MenuItem
                   key={srv.id}
                   onClick={() => {
