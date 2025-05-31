@@ -37,7 +37,7 @@ export default function Footer() {
             Quick Links
           </h4>
           <ul className="space-y-1 list-none">
-            {menus.map((menu) => (
+            {menus?.map((menu) => (
               <li key={menu.id}>
                 <Link
                   href={menu.route}
