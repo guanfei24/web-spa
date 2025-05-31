@@ -1,16 +1,27 @@
+"use client";
+
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useServices } from "@/context/ServicesContext";
 import Link from "next/link";
 
-export default function RecursiveMenu({ menu }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+interface MenuItemType {
+  id: number;
+  title: string;
+  route?: string;
+  parent_id?: number;
+  children?: MenuItemType[];
+}
+
+export default function RecursiveMenu({ menu }: { menu: MenuItemType }) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
   const { serviceCategories } = useServices();
 
-  const handleOpen = (e) => setAnchorEl(e.currentTarget);
+  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+    setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const menuTextStyle = {
@@ -24,6 +35,7 @@ export default function RecursiveMenu({ menu }) {
     },
   };
 
+  // ✅ 特殊处理 Services 菜单
   if (menu.title === "Services") {
     return (
       <>
@@ -56,7 +68,7 @@ export default function RecursiveMenu({ menu }) {
               >
                 {cat.name}
               </MenuItem>
-              {cat.services?.map((srv) => (
+              {cat.services?.map((srv: any) => (
                 <MenuItem
                   key={srv.id}
                   onClick={() => {
@@ -100,7 +112,7 @@ export default function RecursiveMenu({ menu }) {
           },
         }}
       >
-        {menu.children.map((child) => (
+        {menu.children?.map((child) => (
           <MenuItem
             key={child.id}
             onClick={handleClose}
