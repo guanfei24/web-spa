@@ -18,7 +18,7 @@ export default function Home() {
         >
           Book Now
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" href="/services">
           Explore Services
         </Button>
       </div>

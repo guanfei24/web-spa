@@ -37,15 +37,17 @@ export const MenuProvider = ({ children }: { children: ReactNode }) => {
       query: `
         query {
           frontendMenus {
-            id
-            title
-            route
-            children {
-              id
-              title
-              route
-            }
-          }
+                id
+                title
+                route
+                parent_id
+                children {
+                  id
+                  title
+                  route
+                  parent_id
+                }
+              }
         }
       `,
     })
