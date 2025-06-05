@@ -5,14 +5,6 @@ import RecursiveMenu from "@/components/RecursiveMenu";
 import logo from "@/assets/logo/logo.png";
 import { useMenus } from "@/context/MenuContext";
 
-interface MenuItem {
-  id: number;
-  title: string;
-  route?: string;
-  parent_id?: number;
-  children?: MenuItem[];
-}
-
 export default function Header() {
   const { menus } = useMenus();
 
