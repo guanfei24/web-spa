@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import RecursiveMenu from "@/components/RecursiveMenu";
 import logo from "@/assets/logo/logo.png";
 import { useMenus } from "@/context/MenuContext";
