@@ -20,7 +20,7 @@ export default function page() {
           At Healing Harmony Spa, we believe in the power of holistic care. With
           over 10 years of experience, our licensed professionals provide
           personalized treatments that rejuvenate your body, calm your mind, and
-          elevate your spirit. Whether you're looking to relax, recover, or
+          elevate your spirit. Whether you&apos;re looking to relax, recover, or
           simply indulge, our spa offers a tailored experience to suit your
           needs.
         </p>

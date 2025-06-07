@@ -11,17 +11,17 @@ interface MenuItemType {
   parent_id?: number;
   children?: MenuItemType[];
 }
-interface Service {
-  id: number;
-  title: string;
-  price: number;
-  duration: number;
-  slug: string;
-  image_url?: string;
-  description?: string;
-}
+// interface Service {
+//   id: number;
+//   title: string;
+//   price: number;
+//   duration: number;
+//   slug: string;
+//   image_url?: string;
+//   description?: string;
+// }
 export default function RecursiveMenu({ menu }: { menu: MenuItemType }) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   // const open = Boolean(anchorEl);
   // const router = useRouter();
   // const { serviceCategories } = useServices();
