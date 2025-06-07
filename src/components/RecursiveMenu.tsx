@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button, Menu, MenuItem } from "@mui/material";
-import { useServices } from "@/context/ServicesContext";
+import { Button } from "@mui/material";
 import Link from "next/link";
 
 interface MenuItemType {
@@ -24,13 +22,13 @@ interface Service {
 }
 export default function RecursiveMenu({ menu }: { menu: MenuItemType }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const router = useRouter();
-  const { serviceCategories } = useServices();
+  // const open = Boolean(anchorEl);
+  // const router = useRouter();
+  // const { serviceCategories } = useServices();
 
-  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
-    setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  // const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+  //   setAnchorEl(e.currentTarget);
+  // const handleClose = () => setAnchorEl(null);
 
   const menuTextStyle = {
     color: "#b8860b",
