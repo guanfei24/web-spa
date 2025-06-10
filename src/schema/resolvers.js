@@ -40,7 +40,7 @@ export const resolvers = {
         // 前台菜单
         frontendMenus: async () => {
             try {
-                const [rows] = await pool.query('SELECT * FROM menus WHERE type = 1');
+                const [rows] = await pool.query('SELECT * FROM menus WHERE type = 1 and is_active = true');
                 console.log('[frontendMenus] rows:', rows);
                 return buildMenuTree(rows);
             } catch (error) {
