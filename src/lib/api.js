@@ -1,5 +1,5 @@
 // src/api/api.js
-const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/graphql";
+const GRAPHQL_ENDPOINT = "/api/graphql"; // 相对路径适配所有环境
 
 export async function callApi({ query, variables = {} }) {
     console.log("Calling API with query:", query, "and variables:", variables);
