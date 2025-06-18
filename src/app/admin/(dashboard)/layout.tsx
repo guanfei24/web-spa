@@ -5,13 +5,13 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { UserProvider } from "@/context/UserContext";
 
-export default function AdminDashboardLayout({
+export default async function AdminDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
+  const token = (await cookieStore).get("token")?.value;
 
   let user = null;
   if (token) {
@@ -29,7 +29,7 @@ export default function AdminDashboardLayout({
   async function logout() {
     "use server";
     const cookieStore = cookies();
-    cookieStore.set("token", "", {
+    (await cookieStore).set("token", "", {
       path: "/",
       maxAge: 0,
     });

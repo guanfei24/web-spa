@@ -7,15 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Header() {
   const { menus } = useMenus();
-  const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   return (
     <header className="flex items-center gap-8 px-8 py-4">
       <Image
