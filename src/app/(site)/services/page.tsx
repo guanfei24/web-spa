@@ -66,7 +66,7 @@ export default function ServicesPage() {
         Our Services
       </h1>
 
-      {serviceCategories.map((cat) => (
+      {serviceCategories?.map((cat) => (
         <div key={cat.id} className="mb-16">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             {cat.name}
