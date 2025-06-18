@@ -40,7 +40,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="text-xl font-serif text-gold tracking-wide mb-4">
-              快速链接
+              Quick Links
             </h4>
             <ul className="space-y-2">
               {menus?.map((menu) => (
@@ -59,7 +59,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-xl font-serif text-gold tracking-wide mb-4">
-              联系我们
+              Contact Us
             </h4>
             <ul className="space-y-3 text-gray-200">
               <li className="flex items-start">
