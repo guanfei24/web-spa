@@ -3,7 +3,6 @@ import Image from "next/image";
 import RecursiveMenu from "@/components/RecursiveMenu";
 import logo from "@/assets/logo/logo.png";
 import { useMenus } from "@/context/MenuContext";
-import { useEffect, useState } from "react";
 
 export default function Header() {
   const { menus } = useMenus();

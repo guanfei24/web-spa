@@ -1,9 +1,15 @@
-// app/admin/(dashboard)/layout.tsx
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import AdminHeader from "@/components/admin/AdminHeader";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { UserProvider } from "@/context/UserContext";
+import React from "react";
+
+// ✅ 定义 token 解码后的结构
+interface JwtPayload {
+  id: string;
+  name: string;
+}
 
 export default async function AdminDashboardLayout({
   children,
@@ -13,16 +19,21 @@ export default async function AdminDashboardLayout({
   const cookieStore = cookies();
   const token = (await cookieStore).get("token")?.value;
 
-  let user = null;
+  let user: { id: string; name: string } | null = null;
+
   if (token) {
     try {
       const decoded = jwt.verify(
         token,
         process.env.JWT_SECRET || "defaultsecret"
-      ) as any;
-      user = { id: decoded.id, name: decoded.name };
+      ) as JwtPayload;
+
+      user = {
+        id: decoded.id,
+        name: decoded.name,
+      };
     } catch (err) {
-      console.log("❌ Invalid token:", err);
+      console.error("❌ Invalid token:", err);
     }
   }
 
@@ -35,9 +46,7 @@ export default async function AdminDashboardLayout({
     });
     console.log("User logged out");
   }
-  console.log("User in layout:", user);
-  console.log("Token in layout:", token);
-  console.log("logout function:", logout);
+
   return (
     <UserProvider user={user} logout={logout}>
       <div className="flex h-screen bg-gray-50 text-gray-800">
