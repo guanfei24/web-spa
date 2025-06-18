@@ -1,10 +1,15 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 export const typeDefs = gql`
   type User {
     id: ID!
     name: String!
     email: String!
+  }
+
+  type AuthPayload {
+    token: String!
+    user: User!
   }
 
   type Menu {
@@ -36,25 +41,45 @@ export const typeDefs = gql`
     services: [Service]
   }
 
- type Review {
-  id: ID!
-  name: String!
-  rating: Int!
-  comment: String
-  created_at: String
-  is_visible: Boolean
-  employee_id: Int
-  employee_name: String    # ✅ 新增：通过 employee_id 关联的用户名字
-}
+  type Review {
+    id: ID!
+    name: String!
+    rating: Int!
+    comment: String
+    created_at: String
+    is_visible: Boolean
+    employee_id: Int
+    employee_name: String
+  }
 
   type Query {
     users: [User]
     frontendMenus: [Menu]
     adminMenus: [Menu]
-
     services: [Service]
     serviceCategories: [ServiceCategory]
-
-    reviews: [Review]   # ✅ 添加：评论查询
+    reviews: [Review]
+    currentUser: User
   }
+
+  input RegisterInput {
+  name: String!
+  email: String!
+  password: String!
+  roleId: Int! 
+}
+type Role {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type Query {
+  roles: [Role!]!
+}
+  
+type Mutation {
+  login(email: String!, password: String!): User!
+  register(input: RegisterInput!): User!
+}
 `;

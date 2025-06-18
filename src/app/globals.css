@@ -1,9 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 body {
   background-color: black;
   color: #b8860b;
   font-family: "Cinzel", serif;
+}
+
+@keyframes shimmerBounce {
+  0% {
+    background-position: -200% 0;
+    transform: scale(1);
+    text-shadow: 0 0 2px #ffd700, 0 0 4px #ffc107;
+  }
+  50% {
+    background-position: 200% 0;
+    transform: scale(1.05);
+    text-shadow: 0 0 4px #fff8dc, 0 0 10px #ffd700;
+  }
+  100% {
+    background-position: -200% 0;
+    transform: scale(1);
+    text-shadow: 0 0 2px #ffd700, 0 0 4px #ffc107;
+  }
+}
+
+.shimmer-sweep {
+  display: inline-block;
+  background: linear-gradient(90deg, #ffd700 0%, #ffffff 50%, #ffd700 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  animation: shimmerBounce 2.8s ease-in-out infinite alternate;
 }

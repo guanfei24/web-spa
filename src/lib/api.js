@@ -15,7 +15,7 @@ export async function callApi({ query, variables = {} }) {
         });
 
         const result = await response.json();
-
+        console.log("API Response:", result);
         if (result.errors) {
             console.error("GraphQL Errors:", result.errors);
             throw new Error(result.errors[0].message || "GraphQL error occurred");

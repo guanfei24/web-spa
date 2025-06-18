@@ -1,67 +1,84 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useMenus } from "@/context/MenuContext";
-import logo from "@/assets/logo/logo.png"; // ✅ 确保路径正确
+import logo from "@/assets/logo/logo.png";
+import { Phone, Mail, MapPin } from "lucide-react"; // 引入图标以增强视觉效果
 
 export default function Footer() {
   const { menus } = useMenus();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-100 text-gray-700 mt-12 border-t border-gray-300">
-      <div className="max-w-6xl mx-auto px-6 py-10 flex flex-row justify-between gap-8 text-left">
-        {/* Logo & Slogan */}
-        <div className="flex-1">
-          <Link href="/">
-            <Image
-              src={logo}
-              alt="Healing Harmony Spa Logo"
-              width={150}
-              height={150}
-              style={{ objectFit: "contain" }}
-            />
-          </Link>
-          <h2 className="text-xl font-bold text-yellow-600 mb-2">
-            Healing Harmony Spa
-          </h2>
-          <p className="text-sm">
-            Where wellness meets luxury. Rejuvenate your body and soul.
-          </p>
-        </div>
+    // 样式更新：应用黑金主题
+    <footer
+      id="footer"
+      className="bg-black border-t border-gold/30 pt-16 pb-8 font-sans"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left items-start">
+          {/* Logo & Slogan */}
+          <div className="flex flex-col items-start text-left">
+            <Link href="/" className="mb-4">
+              <Image
+                src={logo}
+                alt="Healing Harmony Spa Logo"
+                width={180}
+                height={90}
+                style={{ objectFit: "contain" }}
+              />
+            </Link>
+            <h3 className="text-xl font-serif text-gold tracking-wider mb-2">
+              Healing Harmony Spa
+            </h3>
+          </div>
 
-        {/* Quick Links */}
-        <div className="flex-1">
-          <h4 className="text-lg font-semibold mb-2 text-gray-800">
-            Quick Links
-          </h4>
-          <ul className="space-y-1 list-none">
-            {menus?.map((menu) => (
-              <li key={menu.id}>
-                <Link
-                  href={menu.route}
-                  className="text-[#b8860b] hover:text-[#f5d47b] no-underline transition-colors"
-                >
-                  {menu.title}
-                </Link>
+          {/* Quick Links */}
+          <div className="flex flex-col items-start">
+            <h4 className="text-xl font-serif text-gold tracking-wide mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2">
+              {menus?.map((menu) => (
+                <li key={menu.id}>
+                  <Link
+                    href={menu.route || "#"}
+                    className="text-gray-300 hover:text-gold transition-colors"
+                  >
+                    {menu.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="flex flex-col items-start">
+            <h4 className="text-xl font-serif text-gold tracking-wide mb-4">
+              Contact Us
+            </h4>
+            <ul className="space-y-3 text-gray-200">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 mr-3 mt-1 text-gold flex-shrink-0" />
+                <span>44075 Pipeline Plaza STE 220, Ashburn, VA 20147</span>
               </li>
-            ))}
-          </ul>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 mr-3 text-gold" />
+                <span>(703) 928-2338</span>
+              </li>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 mr-3 text-gold" />
+                <span>hhspa.va@gmail.com</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {/* Contact */}
-        <div className="flex-1">
-          <h4 className="text-lg font-semibold mb-2 text-gray-800">Contact</h4>
-          <p className="text-sm">
-            📍 44075 Pipeline Plaza STE 220, Ashburn, VA 20147
-          </p>
-          <p className="text-sm">📞 (903)928-2338</p>
-          <p className="text-sm">✉️ info@healingharmonyspa.net</p>
+        {/* 版权信息 */}
+        <div className="mt-16 pt-8 border-t border-gold/20 text-center text-gray-500 text-sm">
+          <p>&copy; {year} Healing Harmony Spa. All Rights Reserved.</p>
         </div>
-      </div>
-
-      <div className="text-center text-xs py-4 border-t border-gray-200">
-        © {year} Healing Harmony Spa. All rights reserved.
       </div>
     </footer>
   );

@@ -52,6 +52,8 @@ export const MenuProvider = ({ children }: { children: ReactNode }) => {
       `,
     })
       .then((data) => {
+        console.log("✅ menus loaded", data.frontendMenus); // 👈 添加这个
+
         setMenus(data.frontendMenus);
       })
       .catch((err) => console.error("❌ 加载菜单失败:", err))
