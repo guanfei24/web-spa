@@ -17,28 +17,25 @@ export default function Footer() {
       className="bg-black border-t border-gold/30 pt-16 pb-8 font-sans"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left items-start">
           {/* Logo & Slogan */}
-          <div>
-            <Link href="/">
+          <div className="flex flex-col items-start text-left">
+            <Link href="/" className="mb-4">
               <Image
                 src={logo}
                 alt="Healing Harmony Spa Logo"
-                width={150}
-                height={80} // 调整高度以适应布局
+                width={180}
+                height={90}
                 style={{ objectFit: "contain" }}
               />
             </Link>
-            <h3 className="text-xl font-serif text-gold tracking-wider mt-4 mb-2">
+            <h3 className="text-xl font-serif text-gold tracking-wider mb-2">
               Healing Harmony Spa
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Where wellness meets luxury. Rejuvenate your body and soul.
-            </p>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="flex flex-col items-start">
             <h4 className="text-xl font-serif text-gold tracking-wide mb-4">
               Quick Links
             </h4>
@@ -57,7 +54,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="flex flex-col items-start">
             <h4 className="text-xl font-serif text-gold tracking-wide mb-4">
               Contact Us
             </h4>
