@@ -19,7 +19,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Welcome to Healing Harmony Spa
+          {`Welcome to Healing Harmony Spa`}
         </motion.h1>
 
         <motion.p
@@ -28,7 +28,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          Where wellness meets luxury.
+          {`Where wellness meets luxury.`}
         </motion.p>
 
         <motion.div
@@ -43,7 +43,7 @@ export default function Home() {
             href="https://www.vagaro.com/healingharmonyspallc/book-now"
             className="hover:scale-105 transition-transform duration-300"
           >
-            Book Now
+            {`Book Now`}
           </Button>
           <Button
             variant="contained"
@@ -51,7 +51,7 @@ export default function Home() {
             href="/services"
             className="hover:scale-105 transition-transform duration-300"
           >
-            Explore Services
+            {`Explore Services`}
           </Button>
         </motion.div>
 
@@ -83,7 +83,7 @@ export default function Home() {
               desc: "Soothe your muscles with warm stone energy.",
             },
             {
-              title: "Couple's Massage",
+              title: `Couple's Massage`,
               desc: "Share a relaxing session with your loved one.",
             },
           ].map((s, idx) => (
@@ -112,10 +112,10 @@ export default function Home() {
       >
         <h2 className="text-3xl font-bold mb-6">Current Specials</h2>
         <p className="mb-4">
-          Enjoy 15% off all body massage packages through July!
+          {`Enjoy 15% off all body massage packages through July!`}
         </p>
         <Button variant="contained" color="secondary" href="/promotions">
-          View All Deals
+          {`View All Deals`}
         </Button>
       </motion.div>
 
@@ -130,15 +130,15 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">What Our Clients Say</h2>
         <div className="flex flex-col md:flex-row gap-6 justify-center">
           {[
-            "Amazing experience, I felt totally refreshed!",
-            "Best spa in town – luxurious and relaxing!",
-            "Professional staff and calming environment.",
+            `Amazing experience, I felt totally refreshed!`,
+            `Best spa in town – luxurious and relaxing!`,
+            `Professional staff and calming environment.`,
           ].map((r, i) => (
             <div
               key={i}
               className="p-4 border border-gold rounded-lg max-w-sm mx-auto bg-black/30"
             >
-              <p>"{r}"</p>
+              <p>{`"${r}"`}</p>
             </div>
           ))}
         </div>
@@ -148,7 +148,7 @@ export default function Home() {
             target="_blank"
             className="underline hover:text-white"
           >
-            Read more reviews on Google
+            {`Read more reviews on Google`}
           </a>
         </p>
       </motion.div>
@@ -193,11 +193,11 @@ export default function Home() {
           size="large"
           href="https://www.vagaro.com/healingharmonyspallc/book-now"
         >
-          Book Your Appointment
+          {`Book Your Appointment`}
         </Button>
       </motion.div>
 
-      <div className="mt-32"></div>
+      <div className="mt-32" />
     </motion.div>
   );
 }
