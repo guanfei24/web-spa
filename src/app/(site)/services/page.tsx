@@ -112,36 +112,36 @@ export default function ServicesPage() {
     },
   };
 
-  // 方案 2: 从侧方微移淡入
-  const subtleSlideIn: Variants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  // // 方案 2: 从侧方微移淡入
+  // const subtleSlideIn: Variants = {
+  //   hidden: { opacity: 0, x: -30 },
+  //   visible: {
+  //     opacity: 1,
+  //     x: 0,
+  //     transition: { duration: 0.6, ease: "easeOut" },
+  //   },
+  // };
 
-  // 方案 3: 放大出现
-  const scaleUp: Variants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+  // // 方案 3: 放大出现
+  // const scaleUp: Variants = {
+  //   hidden: { opacity: 0, scale: 0.9 },
+  //   visible: {
+  //     opacity: 1,
+  //     scale: 1,
+  //     transition: { duration: 0.5, ease: "easeOut" },
+  //   },
+  // };
 
-  // 方案 4: 交错动画 (父容器)
-  const staggerContainer: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15, // 每个子元素的动画延迟 0.15 秒
-      },
-    },
-  };
+  // // 方案 4: 交错动画 (父容器)
+  // const staggerContainer: Variants = {
+  //   hidden: { opacity: 0 },
+  //   visible: {
+  //     opacity: 1,
+  //     transition: {
+  //       staggerChildren: 0.15, // 每个子元素的动画延迟 0.15 秒
+  //     },
+  //   },
+  // };
 
   useEffect(() => {
     // ... 您的数据获取逻辑保持不变 ...
