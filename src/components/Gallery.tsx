@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// 为了更好的管理和扩展，我们创建一个数据数组
+// --- 数据部分保持不变 ---
 const galleryItems = [
   {
     id: 1,
-    // 为了效果更明显，这里使用了不同尺寸和主题的占位图
     imgSrc:
       "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop",
     alt: "Spa photo 1",
@@ -19,54 +18,101 @@ const galleryItems = [
   {
     id: 3,
     imgSrc:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1740&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop",
+    alt: "Spa photo 3",
+  },
+  {
+    id: 4,
+    imgSrc:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop",
+    alt: "Spa photo 3",
+  },
+  {
+    id: 5,
+    imgSrc:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop",
+    alt: "Spa photo 3",
+  },
+  {
+    id: 6,
+    imgSrc:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1740&auto=format&fit=crop",
     alt: "Spa photo 3",
   },
 ];
 
-export default function Gallery() {
-  // 使用 useState 来追踪被选中的图片的 ID，null 表示没有选中任何图片
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+// 动画变体 (Variants) 定义
+// 1. 定义容器的变体，用于触发子项的交错动画
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      // staggerChildren 属性是关键，它指定了子元素之间动画的延迟时间
+      staggerChildren: 0.2,
+      duration: 0.5,
+    },
+  },
+} as const;
 
-  // 根据 selectedId 找到对应的 item 对象
+// 2. 定义每个图片卡片的变体
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 }, // 初始状态：在下方20px，透明
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      // 可以给子项动画加上弹簧效果，更有趣
+      type: "spring",
+      stiffness: 90,
+    },
+  },
+} as const;
+
+export default function Gallery() {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const selectedItem = galleryItems.find((item) => item.id === selectedId);
 
   return (
-    <motion.div
-      className="mt-20 text-center px-4" // 增加一些水平内边距
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }} // amount 调整可见性阈值
-      transition={{ duration: 0.5 }}
-    >
+    // 我们将外层 div 作为动画的触发器
+    <div className="mt-20 text-center px-4">
       <h2 className="text-3xl font-bold mb-8">Our Space</h2>
 
-      {/* 图片网格 */}
-      <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {/* 图片网格容器，应用 containerVariants */}
+      <motion.div
+        className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+        // 应用动画变体
+        variants={containerVariants}
+        // 当进入视口时，从 'hidden' 状态过渡到 'visible' 状态
+        initial="hidden"
+        whileInView="visible"
+        // viewport 设置可以确保动画只播放一次
+        viewport={{ once: true, amount: 0.3 }}
+      >
         {galleryItems.map((item) => (
+          // 每个图片卡片应用 itemVariants
           <motion.div
             key={item.id}
-            // 核心：为每个卡片设置唯一的 layoutId
+            variants={itemVariants} // 应用子项动画变体
             layoutId={`card-container-${item.id}`}
             onClick={() => setSelectedId(item.id)}
             className="overflow-hidden rounded-lg shadow-lg cursor-pointer bg-gray-100"
           >
             <motion.img
-              // layoutId 也需要，但通常附加到容器上效果更好
-              // 这里我们让图片充满容器
               src={item.imgSrc}
               alt={item.alt}
               className="object-cover w-full h-64 hover:scale-105 transition-transform duration-300"
+              whileHover={{ scale: 1.05 }} // 使用 motion 的 whileHover 替代 CSS hover
+              transition={{ duration: 0.3 }}
             />
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* 模态框动画容器 */}
+      {/* --- 模态框部分保持不变 --- */}
       <AnimatePresence>
         {selectedId && selectedItem && (
           <motion.div
-            // 点击背景遮罩时关闭模态框
             onClick={() => setSelectedId(null)}
             className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
             initial={{ opacity: 0 }}
@@ -74,23 +120,20 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* 模态框内容区域 */}
             <motion.div
-              // 核心：使用与卡片相同的 layoutId 来实现动画
               layoutId={`card-container-${selectedId}`}
-              // 阻止事件冒泡，防止点击内容区域关闭模态框
               onClick={(e) => e.stopPropagation()}
-              className="overflow-hidden rounded-xl w-full max-w-2xl bg-gray-100" // 模态框样式
+              className="overflow-hidden rounded-xl w-full max-w-2xl bg-gray-100"
             >
               <motion.img
                 src={selectedItem.imgSrc}
                 alt={selectedItem.alt}
-                className="object-contain w-full h-auto max-h-[80vh]" // 调整图片在模态框中的显示
+                className="object-contain w-full h-auto max-h-[80vh]"
               />
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
